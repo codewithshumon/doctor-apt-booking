@@ -42,8 +42,10 @@ const Header = () => {
       <div className="container">
         <div className="flex items-center justify-between">
           {/* ---logo--- */}
-          <div>
-            <img src={logo} alt="logo"></img>
+          <div className=" cursor-pointer">
+            <Link to="/">
+              <img src={logo} alt="logo"></img>
+            </Link>
           </div>
 
           {/* ---logo--- */}
