@@ -8,11 +8,12 @@ import icon01 from './../assets/images/icon01.png';
 import icon02 from './../assets/images/icon02.png';
 import icon03 from './../assets/images/icon03.png';
 import About from '../components/about/About';
+import ServiceList from '../components/services/ServiceList';
 
 const Home = () => {
   return (
     <>
-      {/* ----hero section---- */}
+      {/* ----hero section start---- */}
 
       <section className="hero_section pt-[60px] 2xl:h-[800px]">
         <div className="container">
@@ -105,8 +106,8 @@ const Home = () => {
                 </p>
 
                 <Link
-                  to="/doctors"
-                  className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
+                  to="/services"
+                  className="w-[44px] h-[44px] rounded-full border border-solid border-[#161a23] mt-[30px] mx-auto flex items-center justify-center group hover:bg-primaryColor hover:border-none"
                 >
                   <BsArrowRight />
                 </Link>
@@ -163,8 +164,25 @@ const Home = () => {
           </div>
         </div>
       </section>
+      {/* ----hero section end---- */}
 
       <About />
+
+      {/* ----service section start---- */}
+      <section>
+        <div className="container">
+          <div className="xl:w-[470px] mx-auto">
+            <h2 className="heading text-center">Our Medical Services</h2>
+            <p className="text-para text-center">
+              World-class care for everyone. Our health System offers unmatched,
+              expert health care.
+            </p>
+          </div>
+
+          <ServiceList />
+        </div>
+      </section>
+      {/* ----service section end---- */}
     </>
   );
 };
