@@ -16,6 +16,7 @@ import About from '../components/about/About';
 import ServiceList from '../components/services/ServiceList';
 import DoctorList from '../components/doctors/DoctorList';
 import FaqList from '../components/faq/FaqList';
+import Testimonial from '../components/testimonials/Testimonial';
 
 const Home = () => {
   return (
@@ -292,6 +293,20 @@ const Home = () => {
         </div>
       </section>
       {/* ----Faq section end---- */}
+
+      {/* ----Testimonials section start---- */}
+      <div className="container">
+        <div className="xl:w-[470px] mx-auto">
+          <h2 className="heading text-center">What our patient say</h2>
+          <p className="text-para text-center">
+            World-class care for everyone. Our health System offers unmatched,
+            expert health care.
+          </p>
+        </div>
+
+        <Testimonial />
+      </div>
+      {/* ----Testimonials section end---- */}
     </>
   );
 };
