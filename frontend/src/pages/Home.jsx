@@ -13,6 +13,7 @@ import avatarIcon from './../assets/images/avatar-icon.png';
 
 import About from '../components/about/About';
 import ServiceList from '../components/services/ServiceList';
+import DoctorList from '../components/doctors/DoctorList';
 
 const Home = () => {
   return (
@@ -253,6 +254,22 @@ const Home = () => {
         </div>
       </section>
       {/* ----Feature section end---- */}
+
+      {/* ----Doctors section start---- */}
+      <section>
+        <div className="container">
+          <div className="xl:w-[470px] mx-auto">
+            <h2 className="heading text-center">Our Great Doctors</h2>
+            <p className="text-para text-center">
+              World-class care for everyone. Our health System offers unmatched,
+              expert health care.
+            </p>
+          </div>
+
+          <DoctorList />
+        </div>
+      </section>
+      {/* ----Doctors section end---- */}
     </>
   );
 };
