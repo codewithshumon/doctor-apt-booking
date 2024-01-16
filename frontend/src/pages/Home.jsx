@@ -307,6 +307,9 @@ const Home = () => {
         <Testimonial />
       </div>
       {/* ----Testimonials section end---- */}
+
+      {/* ----Testimonials section end---- */}
+      {/* ----Testimonials section end---- */}
     </>
   );
 };
