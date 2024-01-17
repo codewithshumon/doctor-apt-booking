@@ -295,7 +295,7 @@ const Home = () => {
       {/* ----Faq section end---- */}
 
       {/* ----Testimonials section start---- */}
-      <div className="container">
+      <section className="container">
         <div className="xl:w-[470px] mx-auto">
           <h2 className="heading text-center">What our patient say</h2>
           <p className="text-para text-center">
@@ -305,10 +305,7 @@ const Home = () => {
         </div>
 
         <Testimonial />
-      </div>
-      {/* ----Testimonials section end---- */}
-
-      {/* ----Testimonials section end---- */}
+      </section>
       {/* ----Testimonials section end---- */}
     </>
   );
