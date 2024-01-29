@@ -6,11 +6,12 @@ import {
   getSingleUser,
   updateUser,
 } from '../controllers/userController.js';
+import { authenticate } from '../auth/verifyToken.js';
 
 const router = express.Router();
 
-router.get('/', getAllUsers);
-router.get('/:id', getSingleUser);
+router.get('/', authenticate, getAllUsers);
+router.get('/:id', authenticate, getSingleUser);
 router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);
 
