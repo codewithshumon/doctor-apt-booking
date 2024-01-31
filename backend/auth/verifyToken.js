@@ -32,56 +32,61 @@ export const authenticate = async (req, res, next) => {
   }
 };
 
-// export const restrict = (roles) => async (req, res, next) => {
-//   const userId = req.userId;
-//   let user;
-
-//   const patient = await User.findById(userId);
-//   const doctor = await Doctor.findById(userId);
-
-//   if (patient) {
-//     user = patient;
-//   }
-
-//   if (doctor) {
-//     user = doctor;
-//   }
-
-//   // if (!roles.includes(user.role)) {
-//   //   return res
-//   //     .status(401)
-//   //     .json({ success: false, message: 'You are not authorized' });
-//   // }
-
-//   next();
-// };
-
 export const restrict = (roles) => async (req, res, next) => {
-  const userId = req.params.id;
+  const userId = req.params.id || req.params.doctorId || req.params.userId;
+  let user;
 
-  try {
-    const patient = await User.findById(userId);
-    const doctor = await Doctor.findById(userId);
+  const patient = await User.findById(userId);
+  const doctor = await Doctor.findById(userId);
 
-    if (!patient && !doctor) {
-      return res
-        .status(401)
-        .json({ success: false, message: 'User not found' });
-    }
+  console.log('[req.parmas]', req.params);
+  console.log('[userId]', userId);
+  console.log('[patient]', patient);
+  console.log('[doctor]', doctor);
 
-    const user = patient || doctor;
-
-    if (!user.role || !roles.includes(user.role)) {
-      return res
-        .status(401)
-        .json({ success: false, message: 'You are not authorized' });
-    }
-
-    next();
-  } catch (error) {
-    console.error('Error retrieving user:', error);
-    return res
-      .status(500)
-      .json({ success: false, message: 'Internal Server Error' });
+  if (patient) {
+    user = patient;
   }
+
+  if (doctor) {
+    user = doctor;
+  }
+
+  if (!roles.includes(user.role)) {
+    return res
+      .status(401)
+      .json({ success: false, message: 'You are not authorized' });
+  }
+
+  next();
 };
+
+// export const restrict = (roles) => async (req, res, next) => {
+//   const userId = req.params.id;
+
+//   try {
+//     const patient = await User.findById(userId);
+//     const doctor = await Doctor.findById(userId);
+
+//     if (!patient || !doctor) {
+//       return res
+//         .status(401)
+//         .json({ success: false, message: 'User not found' });
+//     }
+
+//     const user = patient || doctor;
+
+//     if (!user.role || !roles.includes(user.role)) {
+//       return res
+//         .status(401)
+//         .json({ success: false, message: 'You are not authorized' });
+//     }
+
+//     next();
+//   } catch (error) {
+//     console.error('Error retrieving user:', error);
+//     return res
+//       .status(500)
+//       .json({ success: false, message: 'Internal Server Error' });
+//   }
+// };
