@@ -12,7 +12,7 @@ const router = express.Router({ mergeParams: true });
 router
   .route('/')
   .get(getAllReviews)
-  .post(authenticate, restrict(['doctor']), createReview);
+  .post(authenticate, restrict(['patient']), createReview);
 
 // Diffrant way to do that
 // router.get('/', getAllReviews);

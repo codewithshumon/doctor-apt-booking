@@ -20,8 +20,9 @@ export const authenticate = async (req, res, next) => {
     //verify token
     const decoded = Jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-    req.useId = decoded.id;
-    req.useId = decoded.role;
+    req.userId = decoded.id;
+    req.role = decoded.role;
+
     next();
   } catch (error) {
     if (error.name === 'TokenExpiredError') {
@@ -33,8 +34,11 @@ export const authenticate = async (req, res, next) => {
 };
 
 export const restrict = (roles) => async (req, res, next) => {
-  const userId = req.params.id || req.params.userId || req.params.doctorId;
+  //this req.userId from "authenticate > req.userId = decoded.id'
+  const userId = req.userId;
   let user;
+
+  console.log('[restrict req.userId]', req.userId);
 
   const patient = await User.findById(userId);
   const doctor = await Doctor.findById(userId);
@@ -62,19 +66,30 @@ export const restrict = (roles) => async (req, res, next) => {
 };
 
 // export const restrict = (roles) => async (req, res, next) => {
-//   const userId = req.params.id;
+//   const userId = req.userId;
+//   let user;
+
+//   console.log('[restrict req.userId]', req.userId);
 
 //   try {
 //     const patient = await User.findById(userId);
 //     const doctor = await Doctor.findById(userId);
 
-//     if (!patient || !doctor) {
-//       return res
-//         .status(401)
-//         .json({ success: false, message: 'User not found' });
+//     if (patient) {
+//       user = patient;
 //     }
 
-//     const user = patient || doctor;
+//     if (doctor) {
+//       user = doctor;
+//     }
+
+//     // if (!patient || !doctor) {
+//     //   return res
+//     //     .status(401)
+//     //     .json({ success: false, message: 'User not found' });
+//     // }
+
+//     // const user = patient || doctor;
 
 //     if (!user.role || !roles.includes(user.role)) {
 //       return res
