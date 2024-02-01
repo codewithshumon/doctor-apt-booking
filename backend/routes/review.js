@@ -6,12 +6,13 @@ import {
 } from '../controllers/reviewController.js';
 import { authenticate, restrict } from '../auth/verifyToken.js';
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
+//we need to put "authenticate and restrict middlware" where we put { mergeParams: true }
 router
   .route('/')
   .get(getAllReviews)
-  .post(authenticate, restrict(['patient']), createReview);
+  .post(authenticate, restrict(['doctor']), createReview);
 
 // Diffrant way to do that
 // router.get('/', getAllReviews);

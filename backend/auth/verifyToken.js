@@ -33,7 +33,7 @@ export const authenticate = async (req, res, next) => {
 };
 
 export const restrict = (roles) => async (req, res, next) => {
-  const userId = req.params.id || req.params.doctorId || req.params.userId;
+  const userId = req.params.id || req.params.userId || req.params.doctorId;
   let user;
 
   const patient = await User.findById(userId);
