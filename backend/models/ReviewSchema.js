@@ -1,14 +1,15 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import Doctor from './DoctorSchema.js';
 
 const reviewSchema = new mongoose.Schema(
   {
     doctor: {
       type: mongoose.Types.ObjectId,
-      ref: "Doctor",
+      ref: 'Doctor',
     },
     user: {
       type: mongoose.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
     reviewText: {
       type: String,
@@ -25,4 +26,38 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Review", reviewSchema);
+//to show user details of the user who submite the review by middleware
+reviewSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: 'name photo',
+  });
+
+  next();
+});
+
+reviewSchema.statics.calcAvarageRatings = async function (doctorId) {
+  //this points the current review
+  const stats = await this.aggregate([
+    {
+      $match: { doctor: doctorId },
+    },
+    {
+      $group: {
+        _id: '$doctor',
+        numOfRating: { $sum: 1 },
+        avgRating: { $avg: '$rating' },
+      },
+    },
+  ]);
+
+  await Doctor.findByIdAndUpdate(doctorId, {
+    totalRating: stats[0].numOfRating,
+    averageRating: stats[0].averageRating,
+  });
+};
+
+reviewSchema.post('save', function () {
+  this.constructor.calcAvarageRatings(this.doctor);
+});
+export default mongoose.model('Review', reviewSchema);

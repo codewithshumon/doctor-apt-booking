@@ -17,7 +17,7 @@ router.use('/:doctorId/review', reviewRoute);
 //router.use('/:doctorId/review', authenticate, restrict, reviewRoute);
 
 router.get('/', authenticate, getAllDoctors);
-router.get('/:id', authenticate, restrict(['doctor']), getSingleDoctor);
+router.get('/:id', authenticate, restrict(['patient']), getSingleDoctor);
 router.put('/:id', authenticate, restrict(['doctor']), updateDoctor);
 router.delete('/:id', authenticate, restrict(['doctor']), deleteDoctor);
 

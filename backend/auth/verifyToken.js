@@ -38,15 +38,15 @@ export const restrict = (roles) => async (req, res, next) => {
   const userId = req.userId;
   let user;
 
-  console.log('[restrict req.userId]', req.userId);
+  //console.log('[restrict req.userId]', req.userId);
 
   const patient = await User.findById(userId);
   const doctor = await Doctor.findById(userId);
 
-  console.log('[req.parmas]', req.params);
-  console.log('[userId]', userId);
-  console.log('[patient]', patient);
-  console.log('[doctor]', doctor);
+  // console.log('[req.parmas]', req.params);
+  // console.log('[userId]', userId);
+  // console.log('[patient]', patient);
+  // console.log('[doctor]', doctor);
 
   if (patient) {
     user = patient;
