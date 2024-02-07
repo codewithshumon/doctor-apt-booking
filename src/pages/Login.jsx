@@ -2,12 +2,13 @@ import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../config';
 import { toast } from 'react-toastify';
-import { authContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
+import { HashLoader } from 'react-spinners';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { dispatch } = useContext(authContext);
+  const { dispatch } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -96,7 +97,7 @@ const Login = () => {
               className="w-full px-4 py-3 bg-primaryColor text-white text-[18px]
                leading-[30px] rounded-lg"
             >
-              Login
+              {loading ? <HashLoader size={35} color="#ffffff" /> : 'Login'}
             </button>
           </div>
 

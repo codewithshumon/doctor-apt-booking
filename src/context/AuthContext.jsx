@@ -1,33 +1,35 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react-refresh/only-export-components */
-/* eslint-disable no-undef */
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 
 const initialState = {
-  user: null,
-  role: null,
-  token: null,
+  //here user is JSON-STRING so make is object first
+  user:
+    localStorage.getItem('user') !== undefined
+      ? JSON.parse(localStorage.getItem('user'))
+      : null,
+  role: localStorage.getItem('role') || null,
+  token: localStorage.getItem('token') || null,
 };
 
-export const authContext = createContext(initialState);
+export const AuthContext = createContext(initialState);
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case LOGIN_START:
+    case 'LOGIN_START':
       return {
         user: null,
         role: null,
         token: null,
       };
 
-    case LOGIN_SUCCESS:
+    case 'LOGIN_SUCCESS':
       return {
         user: action.payload.user,
         role: action.payload.role,
         token: action.payload.token,
       };
 
-    case LOGOUT:
+    case 'LOGOUT':
       return {
         user: null,
         role: null,
@@ -41,8 +43,16 @@ const authReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  //for store loging data. to avoid remove user info by refresh
+  useEffect(() => {
+    //here user is JSON-OBJECT so make it string first
+    localStorage.user = JSON.stringify(state.user);
+    localStorage.token = state.token;
+    localStorage.role = state.role;
+  }, [state]);
+
   return (
-    <authContext.Provider
+    <AuthContext.Provider
       value={{
         user: state.user,
         role: state.role,
@@ -51,6 +61,6 @@ export const AuthContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </authContext.Provider>
+    </AuthContext.Provider>
   );
 };

@@ -3,6 +3,7 @@ import express from 'express';
 import {
   deleteDoctor,
   getAllDoctors,
+  getDoctorProfile,
   getSingleDoctor,
   updateDoctor,
 } from '../controllers/doctorController.js';
@@ -16,9 +17,10 @@ router.use('/:doctorId/review', reviewRoute);
 //we need had to do that if we use that in express.Router({ mergeParams: true })
 //router.use('/:doctorId/review', authenticate, restrict, reviewRoute);
 
-router.get('/', authenticate, getAllDoctors);
-router.get('/:id', authenticate, restrict(['patient']), getSingleDoctor);
+router.get('/', getAllDoctors);
+router.get('/:id', getSingleDoctor);
 router.put('/:id', authenticate, restrict(['doctor']), updateDoctor);
 router.delete('/:id', authenticate, restrict(['doctor']), deleteDoctor);
+router.get('/profile/me', authenticate, restrict(['doctor']), getDoctorProfile);
 
 export default router;
