@@ -32,8 +32,6 @@ const Signup = () => {
 
     const data = await uploadImageToCloudinary(file);
 
-    console.log('previewURL, selectedFile', [previewURL, selectedFile]);
-
     setPreviewURL(data.url);
     setSelectedFile(data.url);
     setFormData({ ...formData, photo: data.url });
@@ -100,6 +98,7 @@ const Signup = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInpurChange}
+                  required
                   className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor"
                 />
               </div>
@@ -110,6 +109,7 @@ const Signup = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInpurChange}
+                  required
                   className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor"
                 />
               </div>
@@ -119,6 +119,7 @@ const Signup = () => {
                   placeholder="Password"
                   name="password"
                   value={formData.password}
+                  required
                   onChange={handleInpurChange}
                   className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor"
                 />
@@ -133,6 +134,7 @@ const Signup = () => {
                   <select
                     name="role"
                     value={formData.role}
+                    required
                     onChange={handleInpurChange}
                     className=" text-textColor font-semibold text-[16px]
                      leading-7 px-4 py-3 focus:outline-none cursor-pointer"
@@ -149,6 +151,7 @@ const Signup = () => {
                   <select
                     name="gender"
                     value={formData.gender}
+                    required
                     onChange={handleInpurChange}
                     className=" text-textColor font-semibold text-[16px]
                      leading-7 px-4 py-3 focus:outline-none cursor-pointer"
@@ -180,6 +183,7 @@ const Signup = () => {
                     accept=".jpg, .png, .jpeg"
                     className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
                     onChange={handleFileInputChange}
+                    required
                   />
                   <label
                     htmlFor="customFile"
