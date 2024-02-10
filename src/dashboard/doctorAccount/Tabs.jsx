@@ -1,6 +1,15 @@
+/* eslint-disable react/prop-types */
+import { useContext } from 'react';
 import { BiMenu } from 'react-icons/bi';
 
+import { AuthContext } from '../../context/AuthContext';
+
 const Tabs = ({ tab, setTab }) => {
+  const { dispatch } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' });
+  };
   return (
     <div>
       <span className="lg:hidden">
@@ -38,6 +47,18 @@ const Tabs = ({ tab, setTab }) => {
         >
           Settings
         </button>
+
+        <div className="mt-[100px] w-full text-white font-semibold">
+          <button
+            onClick={handleLogout}
+            className="w-full bg-[#181A1E] p-3 text-[16px] rounded-full "
+          >
+            Logout
+          </button>
+          <button className="w-full bg-red-600 mt-4 p-3 text-[16px] rounded-full">
+            Delete Account
+          </button>
+        </div>
       </div>
     </div>
   );
