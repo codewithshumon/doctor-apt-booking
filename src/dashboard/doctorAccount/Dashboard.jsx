@@ -8,6 +8,8 @@ import Loading from '../../components/loader/Loading';
 import Tabs from './Tabs';
 
 import starIcon from './../../assets/images/Star.png';
+import DoctorAbout from '../../pages/doctors/DoctorAbout';
+import Profile from './Profile';
 
 const Dashboard = () => {
   const { data, loading, error } = useFetchData(
@@ -86,10 +88,17 @@ const Dashboard = () => {
                         </p>
                       </div>
                     </div>
+
+                    <DoctorAbout
+                      name={data.doctor?.name}
+                      about={data.doctor?.about}
+                      qualifications={data.doctor?.qualifications}
+                      experiences={data.doctor?.experiences}
+                    />
                   </div>
                 )}
                 {tab === 'appointments' && <div>appoinments</div>}
-                {tab === 'settings' && <div>profile settings</div>}
+                {tab === 'settings' && <Profile />}
               </div>
             </div>
           </div>
