@@ -9,7 +9,7 @@ const Profile = () => {
     gender: '',
     specialization: '',
     ticketPrice: null,
-    qualifications: [],
+    qualifications: [{ stringDate: '', endingDate: '' }],
     experience: [],
     timeSlots: [],
   });
@@ -117,7 +117,36 @@ const Profile = () => {
           </div>
         </div>
 
-        <div></div>
+        <div className="mb-5">
+          <p>Qualifications *</p>
+          {formData.qualifications?.map((item, index) => (
+            <div key={index}>
+              <div className="grid grid-cols-2 gap-5 mt-4">
+                <div>
+                  <p className="form_label">Starting Date *</p>
+                  <input
+                    type="date"
+                    name="stringDate"
+                    value={item.stringDate}
+                    placeholder="DD-MM-YYYY"
+                    className="form_input"
+                    pattern="\d{2}-\d{2}-\d{4}"
+                  />
+                </div>
+                <div>
+                  <p className="form_label">Ending Date *</p>
+                  <input
+                    type="date"
+                    name="endingDate"
+                    value={item.endingDate}
+                    placeholder="DD-MM-YYYY"
+                    className="form_input"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </form>
     </div>
   );
