@@ -1,11 +1,15 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
-
 import { AiOutlineDelete } from 'react-icons/ai';
+import uploadImageToCloudinary from '../../utils/imageUpload';
+import { BASE_URL, token } from '../../config';
+import { toast } from 'react-toastify';
 
-const Profile = () => {
+const Profile = ({ doctorData }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    password: '',
     phone: '',
     bio: '',
     gender: '',
@@ -13,7 +17,7 @@ const Profile = () => {
     ticketPrice: null,
     qualifications: [],
     experiences: [],
-    timeSlots: [{ day: '', staringTime: '', endingTime: '' }],
+    timeSlots: [],
     about: '',
     photo: null,
   });
@@ -22,10 +26,36 @@ const Profile = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileInputChange = () => {};
+  const handleFileInputChange = async (event) => {
+    const file = event.target.files[0];
+
+    const data = await uploadImageToCloudinary(file);
+    setFormData({ ...formData, photo: data?.url });
+  };
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+
+    try {
+      const res = await fetch(`${BASE_URL}/doctor/${doctorData._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      toast.success(result.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   //reusable function for adding item
@@ -98,6 +128,25 @@ const Profile = () => {
   const deleteExperiences = (e, index) => {
     e.preventDefault();
     deleteItem('experiences', index);
+  };
+
+  const addTimeSlot = (e) => {
+    e.preventDefault();
+
+    addItem('timeSlots', {
+      day: '',
+      staringTime: '',
+      endingTime: '',
+    });
+  };
+
+  const handleTimeSlotChange = (event, index) => {
+    handleReusableInputChange('timeSlots', index, event);
+  };
+
+  const deleteTimeSlot = (e, index) => {
+    e.preventDefault();
+    deleteItem('timeSlots', index);
   };
   return (
     <div>
@@ -348,6 +397,7 @@ const Profile = () => {
                     name="day"
                     value={item.day}
                     className="form_input py-4"
+                    onChange={(e) => handleTimeSlotChange(e, index)}
                   >
                     <option value="">Select</option>
                     <option value="sunday">Sunday</option>
@@ -365,6 +415,7 @@ const Profile = () => {
                     name="stringTime"
                     value={item.stringTime}
                     className="form_input"
+                    onChange={(e) => handleTimeSlotChange(e, index)}
                   />
                 </div>
                 <div>
@@ -374,10 +425,14 @@ const Profile = () => {
                     name="endingTime"
                     value={item.endingTime}
                     className="form_input"
+                    onChange={(e) => handleTimeSlotChange(e, index)}
                   />
                 </div>
                 <div className="flex items-center">
-                  <button className="bg-red-600 p-2 rounded-full text-white text-[] mt-10  cursor-pointer">
+                  <button
+                    onClick={(e) => deleteTimeSlot(e, index)}
+                    className="bg-red-600 p-2 rounded-full text-white text-[] mt-10  cursor-pointer"
+                  >
                     <AiOutlineDelete />
                   </button>
                 </div>
@@ -385,7 +440,10 @@ const Profile = () => {
             </div>
           ))}
 
-          <button className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
+          <button
+            onClick={addTimeSlot}
+            className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer"
+          >
             Add Time Slots
           </button>
         </div>
