@@ -66,11 +66,12 @@ const Dashboard = () => {
 
                       <div>
                         <span className="bg-[#CCF0F3] text-irisBlueColor py-1 px-4 lg:py-2 lg:px-6 rounded-lg text-[12px] leading-4 lg:text-[16px] lg:leading-6 font-semibold">
-                          {data.doctor?.specialization || 'Your Specialization'}
+                          {data.doctor?.specialization.toUpperCase() ||
+                            'Your Specialization'}
                         </span>
 
                         <h3 className="text-[22px] leading-9 font-bold text-headingColor mt-3">
-                          Shumon Khan
+                          {data.doctor?.name}
                         </h3>
 
                         <div className="flex items-center gap-[6px]">
@@ -98,7 +99,7 @@ const Dashboard = () => {
                   </div>
                 )}
                 {tab === 'appointments' && <div>appoinments</div>}
-                {tab === 'settings' && <Profile />}
+                {tab === 'settings' && <Profile doctorData={data.doctor} />}
               </div>
             </div>
           </div>

@@ -7,19 +7,19 @@ import { toast } from 'react-toastify';
 
 const Profile = ({ doctorData }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    phone: '',
-    bio: '',
-    gender: '',
-    specialization: '',
-    ticketPrice: null,
-    qualifications: [],
-    experiences: [],
-    timeSlots: [],
-    about: '',
-    photo: null,
+    name: doctorData.name,
+    email: doctorData.email,
+    password: doctorData.password,
+    phone: doctorData.phone,
+    bio: doctorData.bio,
+    gender: doctorData.gender,
+    specialization: doctorData.specialization,
+    ticketPrice: doctorData.ticketPrice,
+    qualifications: doctorData.qualifications,
+    experiences: doctorData.experiences,
+    timeSlots: doctorData.timeSlots,
+    about: doctorData.about,
+    photo: doctorData.photo,
   });
 
   const handleInputChange = (e) => {
@@ -53,7 +53,9 @@ const Profile = ({ doctorData }) => {
       }
 
       toast.success(result.message);
+      window.location.reload();
     } catch (error) {
+      console.log('error', error);
       toast.error(error.message);
     }
   };
@@ -94,10 +96,10 @@ const Profile = ({ doctorData }) => {
     e.preventDefault();
 
     addItem('qualifications', {
-      stringDate: '',
+      staringTime: '',
       endingDate: '',
-      degree: 'PHD',
-      university: 'Dhaka Medical College',
+      degree: '',
+      university: '',
     });
   };
 
@@ -114,10 +116,10 @@ const Profile = ({ doctorData }) => {
     e.preventDefault();
 
     addItem('experiences', {
-      stringDate: '',
+      staringTime: '',
       endingDate: '',
-      position: 'Senior Surgeon',
-      hospital: 'Dhaka Medical',
+      position: '',
+      hospital: '',
     });
   };
 
@@ -177,7 +179,7 @@ const Profile = ({ doctorData }) => {
             className="form_input"
             readOnly
             aria-readonly
-            disabled="true"
+            disabled={true}
           />
         </div>
         <div className="mb-5">
@@ -212,7 +214,7 @@ const Profile = ({ doctorData }) => {
                 name="gender"
                 value={formData.gender}
                 onChange={handleInputChange}
-                className="form_input py-4"
+                className="form_input py-4 cursor-pointer"
               >
                 <option value="">Select</option>
                 <option value="male">Male</option>
@@ -226,7 +228,7 @@ const Profile = ({ doctorData }) => {
                 name="specialization"
                 value={formData.specialization}
                 onChange={handleInputChange}
-                className="form_input py-4"
+                className="form_input py-4 cursor-pointer"
               >
                 <option value="">Select</option>
                 <option value="surgeon">Surgeon</option>
@@ -257,10 +259,10 @@ const Profile = ({ doctorData }) => {
                   <p className="form_label">Starting Date *</p>
                   <input
                     type="date"
-                    name="stringDate"
-                    value={item.stringDate}
+                    name="staringTime"
+                    value={item.staringTime}
                     placeholder="DD-MM-YYYY"
-                    className="form_input"
+                    className="form_input cursor-pointer"
                     onChange={(e) => handleQualificationChange(e, index)}
                   />
                 </div>
@@ -271,7 +273,7 @@ const Profile = ({ doctorData }) => {
                     name="endingDate"
                     value={item.endingDate}
                     placeholder="DD-MM-YYYY"
-                    className="form_input"
+                    className="form_input cursor-pointer"
                     onChange={(e) => handleQualificationChange(e, index)}
                   />
                 </div>
@@ -326,10 +328,10 @@ const Profile = ({ doctorData }) => {
                   <p className="form_label">Starting Date *</p>
                   <input
                     type="date"
-                    name="stringDate"
-                    value={item.stringDate}
+                    name="staringTime"
+                    value={item.staringTime}
                     placeholder="DD-MM-YYYY"
-                    className="form_input"
+                    className="form_input cursor-pointer"
                     onChange={(e) => handleExperiencesChange(e, index)}
                   />
                 </div>
@@ -340,7 +342,7 @@ const Profile = ({ doctorData }) => {
                     name="endingDate"
                     value={item.endingDate}
                     placeholder="DD-MM-YYYY"
-                    className="form_input"
+                    className="form_input cursor-pointer"
                     onChange={(e) => handleExperiencesChange(e, index)}
                   />
                 </div>
@@ -396,7 +398,7 @@ const Profile = ({ doctorData }) => {
                   <select
                     name="day"
                     value={item.day}
-                    className="form_input py-4"
+                    className="form_input py-4 cursor-pointer"
                     onChange={(e) => handleTimeSlotChange(e, index)}
                   >
                     <option value="">Select</option>
@@ -412,9 +414,9 @@ const Profile = ({ doctorData }) => {
                   <p className="form_label">Starting Time *</p>
                   <input
                     type="time"
-                    name="stringTime"
-                    value={item.stringTime}
-                    className="form_input"
+                    name="staringTime"
+                    value={item.staringTime}
+                    className="form_input cursor-pointer"
                     onChange={(e) => handleTimeSlotChange(e, index)}
                   />
                 </div>
@@ -424,7 +426,7 @@ const Profile = ({ doctorData }) => {
                     type="time"
                     name="endingTime"
                     value={item.endingTime}
-                    className="form_input"
+                    className="form_input cursor-pointer"
                     onChange={(e) => handleTimeSlotChange(e, index)}
                   />
                 </div>
