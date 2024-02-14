@@ -12,9 +12,7 @@ const Profile = () => {
     specialization: '',
     ticketPrice: null,
     qualifications: [],
-    experiences: [
-      { stringDate: '', endingDate: '', position: '', hospital: '' },
-    ],
+    experiences: [],
     timeSlots: [{ day: '', staringTime: '', endingTime: '' }],
     about: '',
     photo: null,
@@ -80,6 +78,26 @@ const Profile = () => {
   const deleteQualification = (e, index) => {
     e.preventDefault();
     deleteItem('qualifications', index);
+  };
+
+  const addExperiences = (e) => {
+    e.preventDefault();
+
+    addItem('experiences', {
+      stringDate: '',
+      endingDate: '',
+      position: 'Senior Surgeon',
+      hospital: 'Dhaka Medical',
+    });
+  };
+
+  const handleExperiencesChange = (event, index) => {
+    handleReusableInputChange('experiences', index, event);
+  };
+
+  const deleteExperiences = (e, index) => {
+    e.preventDefault();
+    deleteItem('experiences', index);
   };
   return (
     <div>
@@ -263,6 +281,7 @@ const Profile = () => {
                     value={item.stringDate}
                     placeholder="DD-MM-YYYY"
                     className="form_input"
+                    onChange={(e) => handleExperiencesChange(e, index)}
                   />
                 </div>
                 <div>
@@ -273,6 +292,7 @@ const Profile = () => {
                     value={item.endingDate}
                     placeholder="DD-MM-YYYY"
                     className="form_input"
+                    onChange={(e) => handleExperiencesChange(e, index)}
                   />
                 </div>
               </div>
@@ -285,6 +305,7 @@ const Profile = () => {
                     name="position"
                     value={item.position}
                     className="form_input"
+                    onChange={(e) => handleExperiencesChange(e, index)}
                   />
                 </div>
                 <div>
@@ -294,17 +315,24 @@ const Profile = () => {
                     name="hospital"
                     value={item.hospital}
                     className="form_input"
+                    onChange={(e) => handleExperiencesChange(e, index)}
                   />
                 </div>
               </div>
 
-              <button className="bg-red-600 p-2 rounded-full text-white text-[] mt-2 mb-[30px] cursor-pointer">
+              <button
+                onClick={(e) => deleteExperiences(e, index)}
+                className="bg-red-600 p-2 rounded-full text-white text-[] mt-2 mb-[30px] cursor-pointer"
+              >
                 <AiOutlineDelete />
               </button>
             </div>
           ))}
 
-          <button className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer">
+          <button
+            onClick={addExperiences}
+            className="bg-[#000] py-2 px-5 rounded text-white h-fit cursor-pointer"
+          >
             Add Experiences
           </button>
         </div>
