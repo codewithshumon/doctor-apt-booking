@@ -42,7 +42,6 @@ const Login = () => {
         payload: { user: result.data, token: result.token, role: result.role },
       });
 
-      console.log('login result', result);
       setLoading(false);
       toast.success(result.message);
       navigate('/home');

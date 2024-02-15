@@ -14,7 +14,6 @@ const Doctors = () => {
 
   const handleSearch = () => {
     setQuery(query.trim());
-    console.log('Handle Query');
   };
 
   //this is to reduce re-rendering on query typing

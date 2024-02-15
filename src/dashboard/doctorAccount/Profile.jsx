@@ -6,6 +6,7 @@ import { BASE_URL, token } from '../../config';
 import { toast } from 'react-toastify';
 
 const Profile = ({ doctorData }) => {
+  console.log('doctorData', doctorData);
   const [formData, setFormData] = useState({
     name: doctorData?.name,
     email: doctorData?.email,
@@ -21,8 +22,6 @@ const Profile = ({ doctorData }) => {
     about: doctorData?.about,
     photo: doctorData?.photo,
   });
-
-  console.log('formData', formData);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -246,6 +245,7 @@ const Profile = ({ doctorData }) => {
                 placeholder="100"
                 name="ticketPrice"
                 value={formData.ticketPrice}
+                onChange={handleInputChange}
                 className="form_input"
               />
             </div>

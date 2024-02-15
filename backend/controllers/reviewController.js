@@ -14,11 +14,11 @@ export const getAllReviews = async (req, res) => {
 };
 
 export const createReview = async (req, res) => {
-  if (!req.body.doctor) req.body.doctor = req.params.doctorId;
+  if (!req.body.doctor) req.body.doctor = req.params.id;
   if (!req.body.user) req.body.user = req.userId;
 
-  console.log('[req.body.doctor]', req.body.doctor);
-  console.log('[req.body.user]', req.body.user);
+  console.log('[req.params.id]', req.params.id);
+  console.log('[req.userId;]', req.userId);
   const newReview = new Review(req.body);
 
   try {

@@ -8,7 +8,6 @@ const DoctorCard = ({ doctor }) => {
   const { name, specialization, avgRating, totalRating, photo, experiences } =
     doctor;
 
-  console.log('doctor', doctor);
   return (
     <div className="p-3 lg:p-5">
       <div>
