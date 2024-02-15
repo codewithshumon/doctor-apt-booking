@@ -5,15 +5,10 @@ import { BsArrowRight } from 'react-icons/bs';
 import starIcon from './../../assets/images/Star.png';
 
 const DoctorCard = ({ doctor }) => {
-  const {
-    name,
-    specialization,
-    avgRating,
-    totalRating,
-    photo,
-    totalPatients,
-    hospital,
-  } = doctor;
+  const { name, specialization, avgRating, totalRating, photo, experiences } =
+    doctor;
+
+  console.log('doctor', doctor);
   return (
     <div className="p-3 lg:p-5">
       <div>
@@ -26,7 +21,7 @@ const DoctorCard = ({ doctor }) => {
 
       <div className="mt-2 lg:mt-4 flex items-center justify-between">
         <span className="bg-[#CCF0F3] py-1 px-2 lg:py-2 lg:px-6 text-[12px] lg:text-[16px] leading-4 lg:leading-7 text-irisBlueColor font-semibold rounded">
-          {specialization}
+          {specialization?.toUpperCase()}
         </span>
 
         <div className="flex items-center gap-[6px]">
@@ -42,16 +37,19 @@ const DoctorCard = ({ doctor }) => {
 
       <div className="mt-[18px] lg:mt-5 flex items-center justify-between">
         <div>
-          <h3 className="text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold text-headingColor">
-            +{totalPatients} patients
-          </h3>
+          {/* <h3 className="text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold text-headingColor">
+            +{totalPatients || 0} patients
+          </h3> */}
           <p className="text-[14px] leading-6 font-[400] text-textColor">
-            At {hospital}
+            at{' '}
+            <span className="font-semibold">
+              {experiences && experiences[0]?.hospital}
+            </span>
           </p>
         </div>
 
         <Link
-          to="/doctors"
+          to={`/doctor/${doctor._id}`}
           className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E]  flex items-center justify-center group hover:bg-primaryColor hover:border-none"
         >
           <BsArrowRight />

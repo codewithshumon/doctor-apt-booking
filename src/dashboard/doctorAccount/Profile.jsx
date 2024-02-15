@@ -7,20 +7,22 @@ import { toast } from 'react-toastify';
 
 const Profile = ({ doctorData }) => {
   const [formData, setFormData] = useState({
-    name: doctorData.name,
-    email: doctorData.email,
-    password: doctorData.password,
-    phone: doctorData.phone,
-    bio: doctorData.bio,
-    gender: doctorData.gender,
-    specialization: doctorData.specialization,
-    ticketPrice: doctorData.ticketPrice,
-    qualifications: doctorData.qualifications,
-    experiences: doctorData.experiences,
-    timeSlots: doctorData.timeSlots,
-    about: doctorData.about,
-    photo: doctorData.photo,
+    name: doctorData?.name,
+    email: doctorData?.email,
+    password: doctorData?.password,
+    phone: doctorData?.phone,
+    bio: doctorData?.bio,
+    gender: doctorData?.gender,
+    specialization: doctorData?.specialization,
+    ticketPrice: doctorData?.ticketPrice,
+    qualifications: doctorData?.qualifications,
+    experiences: doctorData?.experiences,
+    timeSlots: doctorData?.timeSlots,
+    about: doctorData?.about,
+    photo: doctorData?.photo,
   });
+
+  console.log('formData', formData);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -96,7 +98,7 @@ const Profile = ({ doctorData }) => {
     e.preventDefault();
 
     addItem('qualifications', {
-      staringTime: '',
+      startingDate: '',
       endingDate: '',
       degree: '',
       university: '',
@@ -116,7 +118,7 @@ const Profile = ({ doctorData }) => {
     e.preventDefault();
 
     addItem('experiences', {
-      staringTime: '',
+      startingDate: '',
       endingDate: '',
       position: '',
       hospital: '',
@@ -137,7 +139,7 @@ const Profile = ({ doctorData }) => {
 
     addItem('timeSlots', {
       day: '',
-      staringTime: '',
+      startingTime: '',
       endingTime: '',
     });
   };
@@ -259,8 +261,8 @@ const Profile = ({ doctorData }) => {
                   <p className="form_label">Starting Date *</p>
                   <input
                     type="date"
-                    name="staringTime"
-                    value={item.staringTime}
+                    name="startingDate"
+                    value={item.startingDate}
                     placeholder="DD-MM-YYYY"
                     className="form_input cursor-pointer"
                     onChange={(e) => handleQualificationChange(e, index)}
@@ -328,8 +330,8 @@ const Profile = ({ doctorData }) => {
                   <p className="form_label">Starting Date *</p>
                   <input
                     type="date"
-                    name="staringTime"
-                    value={item.staringTime}
+                    name="startingDate"
+                    value={item.startingDate}
                     placeholder="DD-MM-YYYY"
                     className="form_input cursor-pointer"
                     onChange={(e) => handleExperiencesChange(e, index)}
@@ -414,8 +416,8 @@ const Profile = ({ doctorData }) => {
                   <p className="form_label">Starting Time *</p>
                   <input
                     type="time"
-                    name="staringTime"
-                    value={item.staringTime}
+                    name="startingTime"
+                    value={item.startingTime}
                     className="form_input cursor-pointer"
                     onChange={(e) => handleTimeSlotChange(e, index)}
                   />

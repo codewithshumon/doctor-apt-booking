@@ -76,7 +76,7 @@ const Header = () => {
                 <Link
                   to={`${
                     role === 'doctor'
-                      ? '/doctors/profile/me'
+                      ? '/doctor/profile/me'
                       : '/users/profile/me'
                   }`}
                 >

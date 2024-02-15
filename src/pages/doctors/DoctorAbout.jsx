@@ -28,7 +28,7 @@ const DoctorAbout = ({ name, about, qualifications, experiences }) => {
               >
                 <div>
                   <span className="text-[15px] text-irisBlueColor leading-6 font-semibold">
-                    {formatDate(item.startingDate)} -
+                    {formatDate(item.startingDate)} -{' '}
                     {formatDate(item.endingDate)}
                   </span>
                   <p className="text-[16px] leading-6 font-medium text-textColor">

@@ -10,6 +10,7 @@ import Tabs from './Tabs';
 import starIcon from './../../assets/images/Star.png';
 import DoctorAbout from '../../pages/doctors/DoctorAbout';
 import Profile from './Profile';
+import Appointments from './Appointments';
 
 const Dashboard = () => {
   const { data, loading, error } = useFetchData(
@@ -66,7 +67,7 @@ const Dashboard = () => {
 
                       <div>
                         <span className="bg-[#CCF0F3] text-irisBlueColor py-1 px-4 lg:py-2 lg:px-6 rounded-lg text-[12px] leading-4 lg:text-[16px] lg:leading-6 font-semibold">
-                          {data.doctor?.specialization.toUpperCase() ||
+                          {data.doctor?.specialization?.toUpperCase() ||
                             'Your Specialization'}
                         </span>
 
@@ -98,7 +99,9 @@ const Dashboard = () => {
                     />
                   </div>
                 )}
-                {tab === 'appointments' && <div>appoinments</div>}
+                {tab === 'appointments' && (
+                  <Appointments appointments={data.appointments} />
+                )}
                 {tab === 'settings' && <Profile doctorData={data.doctor} />}
               </div>
             </div>
