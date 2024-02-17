@@ -18,12 +18,12 @@ const FeedbackForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      if (!rating || !reviewText) {
-        setLoading(false);
-        return toast.error('Rating & Text fields are required');
-      }
+    if (!rating || !reviewText) {
+      setLoading(false);
+      return toast.error('Rating & Text fields are required');
+    }
 
+    try {
       const res = await fetch(`${BASE_URL}/doctor/${id}/review`, {
         method: 'POST',
         headers: {

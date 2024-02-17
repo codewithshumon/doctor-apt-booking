@@ -5,6 +5,7 @@ export const getAllReviews = async (req, res) => {
   try {
     const reviews = await Review.find({});
 
+    console.log('reviews', reviews);
     res
       .status(200)
       .json({ sucess: true, message: 'Successful', data: reviews });
@@ -14,10 +15,10 @@ export const getAllReviews = async (req, res) => {
 };
 
 export const createReview = async (req, res) => {
-  if (!req.body.doctor) req.body.doctor = req.params.id;
+  if (!req.body.doctor) req.body.doctor = req.params.doctorId;
   if (!req.body.user) req.body.user = req.userId;
 
-  console.log('[req.params.id]', req.params.id);
+  console.log('[req.params.doctorId]', req.params.doctorId);
   console.log('[req.userId;]', req.userId);
   const newReview = new Review(req.body);
 
