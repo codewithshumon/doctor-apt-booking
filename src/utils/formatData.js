@@ -5,6 +5,19 @@ export const formatDate = (date, config) => {
   return new Date(date).toLocaleDateString('en-US', options);
 };
 
+export const formatDateTime = (date, config) => {
+  const defaultOptions = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+  const options = config ? config : defaultOptions;
+
+  return new Date(date).toLocaleDateString('en-US', options);
+};
+
 export const formatTime = (time) => {
   const [hours, minutes] = time.split(':');
   const date = new Date();

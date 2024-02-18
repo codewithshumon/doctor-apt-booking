@@ -46,6 +46,7 @@ const FeedbackForm = () => {
       toast.error(error.message);
     } finally {
       setLoading(false);
+      window.location.reload();
     }
   };
   return (
