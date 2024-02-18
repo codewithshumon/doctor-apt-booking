@@ -37,6 +37,15 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleStickyHeader);
   });
 
+  const handleProfileClick = () => {
+    if (role === 'doctor') {
+      window.location.reload();
+      window.location.replace('/doctor/profile/me');
+    } else {
+      window.location.reload();
+      window.location.replace('/users/profile/me');
+    }
+  };
   const toggleMenu = () => menuRef.current.classList.toggle('show_menu');
   return (
     <header className="header flex items-center" ref={headerRef}>
@@ -73,13 +82,7 @@ const Header = () => {
           <div className="flex items-center gap-4">
             {token && user ? (
               <div>
-                <Link
-                  to={`${
-                    role === 'doctor'
-                      ? '/doctor/profile/me'
-                      : '/users/profile/me'
-                  }`}
-                >
+                <button onClick={handleProfileClick}>
                   <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
                     <img
                       src={user?.photo}
@@ -87,7 +90,7 @@ const Header = () => {
                       alt="user-avatar"
                     />
                   </figure>
-                </Link>
+                </button>
               </div>
             ) : (
               <Link to="/login">

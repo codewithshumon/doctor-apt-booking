@@ -23,6 +23,7 @@ const Profile = ({ doctorData }) => {
     photo: doctorData?.photo,
   });
 
+  console.log('formData.timeSlots', formData.timeSlots);
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

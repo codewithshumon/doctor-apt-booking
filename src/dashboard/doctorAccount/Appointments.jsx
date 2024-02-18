@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import { formatDate } from '../../utils/formatData';
 
-/* eslint-disable react/prop-types */
 const Appointments = ({ appointments }) => {
   return (
     <table className="w-full text-left text-sm text-gray-500">

@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { formatTime } from '../../utils/formatData';
 
-/* eslint-disable react/prop-types */
-const SidePanel = ({ timeSlots, ticketPrice }) => {
+const SidePanel = ({ doctorId, timeSlots, ticketPrice }) => {
   console.log('timeSlots', timeSlots);
   return (
     <div className="p-3 lg:p-5 shadow-panelShadow rounded-md">
@@ -26,8 +26,7 @@ const SidePanel = ({ timeSlots, ticketPrice }) => {
                 className="flex items-center justify-between mb-2"
               >
                 <p className="text-[16px] leading-6 text-textColor font-semibold">
-                  {timeSlot.day.charAt(0).toUpperCase() +
-                    timeSlot.day.slice(1).toLowerCase()}
+                  {timeSlot.day.charAt(0).toUpperCase() + timeSlot.day.slice(1)}
                 </p>
                 <p className="text-[16px] leading-6 text-textColor font-semibold">
                   {formatTime(timeSlot.startingTime)} -{' '}
