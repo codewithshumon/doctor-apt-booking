@@ -16,24 +16,24 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-  origin: ['https://shumon-mern-doctor.vercel.app/'],
+  origin: 'https://shumon-mern-doctor.vercel.app',
   methods: ['POST', 'GET', 'PUT', 'DELETE'],
   credentials: true,
 };
 
 mongoose.set('strictQuery', false);
-const connnectDB = async () => {
+const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
 
-    console.log('MongoDB databased is connected');
+    console.log('MongoDB database is connected');
   } catch (error) {
-    console.log(`MongoDB databased connection failed: ${error}`);
+    console.log(`MongoDB database connection failed: ${error}`);
   }
 };
 
 app.listen(port, () => {
-  connnectDB();
+  connectDB();
   console.log(`Server is running on port ${port}`);
 });
 
@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
   res.send('API is working');
 });
 
-//middleware
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
