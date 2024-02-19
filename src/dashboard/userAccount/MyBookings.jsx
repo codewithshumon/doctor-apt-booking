@@ -3,6 +3,7 @@ import useFetchData from '../../hooks/useFetchData';
 
 import Error from '../../components/error/Error';
 import Loading from '../../components/loader/Loading';
+import DoctorCard from '../../components/doctors/DoctorCard';
 
 const MyBookings = () => {
   const {
