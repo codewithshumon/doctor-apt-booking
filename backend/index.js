@@ -15,11 +15,13 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
-const corsOptions = {
-  origin: 'https://shumon-mern-doctor.vercel.app',
-  methods: ['POST', 'GET', 'PUT', 'DELETE'],
-  credentials: true,
-};
+app.use(
+  cors({
+    origin: ['https://shumon-mern-doctor.vercel.app'],
+    methods: ['POST', 'GET', 'PUT', 'DELETE'],
+    credentials: true,
+  })
+);
 
 mongoose.set('strictQuery', false);
 const connectDB = async () => {
@@ -44,7 +46,6 @@ app.get('/', (req, res) => {
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors(corsOptions));
 
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/user', userRoute);
