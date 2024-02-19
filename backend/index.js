@@ -17,9 +17,9 @@ const port = process.env.PORT || 8000;
 
 app.use(
   cors({
-    origin: ['https://shumon-mern-doctor.vercel.app'],
+    origin: true, //['https://shumon-mern-doctor.vercel.app']
     methods: ['POST', 'GET', 'PUT', 'DELETE'],
-    credentials: true,
+    // credentials: true,
   })
 );
 
