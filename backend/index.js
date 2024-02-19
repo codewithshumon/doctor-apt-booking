@@ -30,7 +30,7 @@ app.listen(port, () => {
 });
 
 app.get('/', (req, res) => {
-  res.send('API is working');
+  res.json('API is working');
 });
 
 //middleware
