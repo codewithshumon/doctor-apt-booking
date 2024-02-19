@@ -46,6 +46,10 @@ app.get('/', (req, res) => {
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use((req, res, next) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' });
+  next();
+});
 
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/user', userRoute);
