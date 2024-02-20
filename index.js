@@ -31,11 +31,11 @@ app.use(
 const _dirname = path.resolve();
 
 // Serve static files from the build folder
-app.use(express.static(path.join(_dirname, 'build')));
+app.use(express.static(path.join(_dirname, 'dist')));
 
 // Define a wildcard route that serves index.html for all routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(_dirname, 'build', 'index.html'));
+  res.sendFile(path.join(_dirname, 'dist', 'index.html'));
 });
 //THIS IS THE PROBLEM
 
