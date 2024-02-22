@@ -12,11 +12,13 @@ import MyAccount from './dashboard/userAccount/MyAccount';
 import Dashboard from './dashboard/doctorAccount/Dashboard';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
+import Modal from './components/modal/Modal';
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <Modal />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

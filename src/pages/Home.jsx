@@ -29,7 +29,7 @@ const Home = () => {
             {/* ----hero content---- */}
 
             <div>
-              <div className=" lg:w-[570px]">
+              <div className=" lg:w-[570px] flex flex-col">
                 <h1 className=" text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px]">
                   We help patients live a healthy, longer life
                 </h1>
@@ -40,11 +40,13 @@ const Home = () => {
                   consequatur fugiat atque temporibus.
                 </p>
 
-                <button className="btn">Request an Appointment</button>
+                <Link to="/doctors" className="btn w-fit">
+                  Request an Appointment
+                </Link>
               </div>
 
               {/* ----hero content---- */}
-              <div className="mt-[30px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
+              <div className="mt-[20px] lg:mt-[40px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
                 <div>
                   <h2 className="text-[36px] leading-[54px] lg:text-[44px] lg:leading-[54px] font-[700] text-headingColor">
                     30+

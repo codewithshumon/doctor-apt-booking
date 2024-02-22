@@ -1,9 +1,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+
+import { useState } from 'react';
 import { formatTime } from '../../utils/formatData';
+import Modal from '../../components/modal/Modal';
 
 const SidePanel = ({ doctorId, timeSlots, ticketPrice }) => {
-  console.log('timeSlots', timeSlots);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleBookAppointment = () => {
+    console.log('handleBookAppointment');
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="p-3 lg:p-5 shadow-panelShadow rounded-md">
       <div className="flex items-center justify-between">
@@ -39,17 +48,27 @@ const SidePanel = ({ doctorId, timeSlots, ticketPrice }) => {
           {timeSlots && timeSlots.length === 0 && (
             <li className="flex items-center justify-between mb-2">
               <p className="text-[16px] leading-6 text-textColor font-semibold">
-                Tuesday
+                Day
               </p>
               <p className="text-[16px] leading-6 text-textColor font-semibold">
-                4:00 PM - 9:30 PM
+                Time AM - Time PM
               </p>
             </li>
           )}
         </ul>
       </div>
 
-      <button className="btn">Book Appointment</button>
+      <button className="btn" onClick={handleBookAppointment}>
+        Book Appointment
+      </button>
+
+      {isModalOpen && (
+        <Modal
+          title="Book Appointment"
+          setIsModalOpen={setIsModalOpen}
+          isOpen={isModalOpen ? true : false}
+        ></Modal>
+      )}
     </div>
   );
 };
