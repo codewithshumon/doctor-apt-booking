@@ -35,7 +35,7 @@
   }
 
   .form_label {
-    @apply text-textColor font-semibold text-[16px] leading-7 mb-2;
+    @apply text-textColor font-semibold text-[14px] md:text-[16px] sm:leading-7 sm:mb-2;
   }
 
   .form_input {
