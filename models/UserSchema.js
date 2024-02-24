@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
@@ -8,12 +8,12 @@ const UserSchema = new mongoose.Schema({
   photo: { type: String },
   role: {
     type: String,
-    enum: ["patient", "admin"],
-    default: "patient",
+    enum: ['patient', 'admin'],
+    default: 'patient',
   },
-  gender: { type: String, enum: ["male", "female", "other"] },
+  gender: { type: String, enum: ['male', 'female', 'other'] },
   bloodType: { type: String },
-  appointments: [{ type: mongoose.Types.ObjectId, ref: "Appointment" }],
+  bookings: [{ type: mongoose.Types.ObjectId, ref: 'Booking' }],
 });
 
-export default mongoose.model("User", UserSchema);
+export default mongoose.model('User', UserSchema);
