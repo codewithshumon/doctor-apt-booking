@@ -1,16 +1,18 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { BASE_URL, token } from '../../config';
 import { HashLoader } from 'react-spinners';
+
+import { BASE_URL, token } from '../../config';
 import { getCurrentDate, getCurrentTime } from '../../utils/formatData';
 
 const ModalForm = () => {
+  const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    phone: '',
-    age: '',
+    phone: 0,
+    age: 0,
     gender: '',
     date: '',
     time: '',
@@ -27,8 +29,9 @@ const ModalForm = () => {
     e.preventDefault();
     setLoading(true);
 
+    console.log('token', token);
     try {
-      const res = await fetch(`${BASE_URL}/user/`, {
+      const res = await fetch(`${BASE_URL}/doctor/${id}/booking`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,19 +40,20 @@ const ModalForm = () => {
         body: JSON.stringify(formData),
       });
 
-      const { message } = await res.json();
+      console.log('res', res);
+
+      const result = await res.json();
 
       if (!res.ok) {
-        throw new Error(message);
+        throw new Error(result.message);
       }
 
-      setLoading(false);
-      toast.success(message);
+      toast.success(result.message);
     } catch (error) {
-      console.log(error);
-
       toast.error(error.message);
+    } finally {
       setLoading(false);
+      //window.location.reload();
     }
   };
 
@@ -74,7 +78,7 @@ const ModalForm = () => {
               type="number"
               placeholder="Phone Number *"
               name="phone"
-              value={formData.phone}
+              value={formData.phone === 0 ? '' : formData.phone}
               onChange={handleInpurChange}
               className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[12px] md:text-[16px] leading-7 text-headingColor placeholder:text-textColor"
               required
@@ -86,7 +90,7 @@ const ModalForm = () => {
               type="number"
               placeholder="Age *"
               name="age"
-              value={formData.age}
+              value={formData.age === 0 ? '' : formData.age}
               onChange={handleInpurChange}
               className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[12px] md:text-[16px] leading-7 text-headingColor placeholder:text-textColor"
               required
@@ -100,7 +104,7 @@ const ModalForm = () => {
             >
               Gender: *
               <select
-                name="gender "
+                name="gender"
                 value={formData.gender}
                 onChange={handleInpurChange}
                 className=" text-textColor font-semibold text-[16px]
@@ -147,13 +151,13 @@ const ModalForm = () => {
           </div>
         </div>
         <div className="mt-4">
-          <p className="form_label text-start">About *</p>
+          <p className="form_label text-start">Note *</p>
           <textarea
             name="note"
             rows={2}
             maxLength={200}
             value={formData.note}
-            placeholder="Write about your issue or what you are looking for"
+            placeholder="Write about your issue or what service you are looking for"
             onChange={handleInpurChange}
             className="form_input"
           ></textarea>
