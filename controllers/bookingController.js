@@ -3,8 +3,23 @@ import Doctor from '../models/DoctorSchema.js';
 import User from '../models/UserSchema.js';
 
 export const getAllBooking = async (req, res) => {
+  const id = req.userId;
   try {
-    const bookings = await Booking.find({});
+    const bookings = await Booking.find(id);
+
+    console.log('reviews', bookings);
+    res
+      .status(200)
+      .json({ sucess: true, message: 'Successful', data: bookings });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ sucess: false, message: 'Not found' });
+  }
+};
+
+export const deleteBooking = async (req, res) => {
+  try {
+    const bookings = await Booking.findByIdAndDelete();
 
     console.log('reviews', bookings);
     res
@@ -49,13 +64,11 @@ export const createBooking = async (req, res) => {
     });
 
     // Respond with success message and the saved booking data
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: 'Booking submitted',
-        data: savedBooking,
-      });
+    res.status(200).json({
+      success: true,
+      message: 'Booking submitted',
+      data: savedBooking,
+    });
   } catch (error) {
     // Handle errors
     console.log(error);

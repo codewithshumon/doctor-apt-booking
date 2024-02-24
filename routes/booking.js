@@ -3,6 +3,7 @@ import express from 'express';
 import { authenticate, restrict } from '../auth/verifyToken.js';
 import {
   createBooking,
+  deleteBooking,
   getAllBooking,
 } from '../controllers/bookingController.js';
 
@@ -13,7 +14,12 @@ const router = express.Router({ mergeParams: true });
 router
   .route('/')
   .get(getAllBooking)
-  .post(authenticate, restrict(['patient']), createBooking);
+  .post(authenticate, restrict(['patient']), createBooking)
+  .delete(
+    authenticate,
+    restrict(['patient', 'doctor', 'admin']),
+    deleteBooking
+  );
 
 // Diffrant way to do that
 // router.get('/', getAllReviews);

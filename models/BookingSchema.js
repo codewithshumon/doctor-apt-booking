@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import Doctor from './Doctor';
-import User from './User';
+import Doctor from './DoctorSchema.js';
+import User from './UserSchema.js';
 
 const bookingSchema = new mongoose.Schema(
   {
