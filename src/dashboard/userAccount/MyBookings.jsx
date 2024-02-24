@@ -3,14 +3,14 @@ import useFetchData from '../../hooks/useFetchData';
 
 import Error from '../../components/error/Error';
 import Loading from '../../components/loader/Loading';
-import DoctorCard from '../../components/doctors/DoctorCard';
+import BookingCard from '../../components/booking/BookingCard';
 
 const MyBookings = () => {
   const {
-    data: appointments,
+    data: bookings,
     loading,
     error,
-  } = useFetchData(`${BASE_URL}/user/appointments/my-appointments`);
+  } = useFetchData(`${BASE_URL}/booking`);
 
   return (
     <section>
@@ -20,13 +20,13 @@ const MyBookings = () => {
 
         {!loading && !error && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            {appointments.map((doctor) => (
-              <DoctorCard key={doctor._id} doctor={doctor} />
+            {bookings.map((booking) => (
+              <BookingCard key={booking._id} booking={booking} />
             ))}
           </div>
         )}
 
-        {!loading && !error && appointments.length === 0 && (
+        {!loading && !error && bookings.length === 0 && (
           <h2 className="mx-5 text-center text-headingColor leading-7 text-[20px] font-semibold ">
             You did not book any doctor appointment yet!
           </h2>
