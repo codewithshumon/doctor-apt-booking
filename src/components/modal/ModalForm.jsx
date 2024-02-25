@@ -53,7 +53,7 @@ const ModalForm = () => {
       toast.error(error.message);
     } finally {
       setLoading(false);
-      //window.location.reload();
+      window.location.replace('/users/profile/me');
     }
   };
 

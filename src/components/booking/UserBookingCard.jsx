@@ -1,9 +1,52 @@
 /* eslint-disable react/prop-types */
 
+import { HashLoader } from 'react-spinners';
 import { formatDate, formatTime } from '../../utils/formatData';
+import { BASE_URL, token } from '../../config';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const UserBookingCard = ({ booking }) => {
-  const { date, doctor, time } = booking;
+  const [loading, setLoading] = useState(false);
+  const { date, user, doctor, time, _id: id } = booking;
+
+  const userId = user._id;
+  const doctorId = doctor._id;
+
+  console.log(booking);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    console.log('token', token);
+    try {
+      const res = await fetch(
+        `${BASE_URL}/booking/${id}/${userId}/${doctorId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log('res', res);
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      toast.success(result.message);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+      window.location.reload();
+    }
+  };
 
   console.log(booking);
   return (
@@ -17,7 +60,7 @@ const UserBookingCard = ({ booking }) => {
           />
         </div>
         <div className="flex h-full x flex-col justify-between md:justify-around">
-          <di>
+          <div>
             <h1 className="text-[22px] leading-9 font-bold text-headingColor">
               {doctor.name}
             </h1>
@@ -25,7 +68,7 @@ const UserBookingCard = ({ booking }) => {
               {doctor.specialization.charAt(0).toUpperCase() +
                 doctor.specialization.slice(1)}
             </h2>
-          </di>
+          </div>
           <div className=" text-headingColor  text-[14px] leading-5 lg:text-[16] lg:leading-6 font-semibold">
             <p>Price: ${doctor.ticketPrice}</p>
             <p>Date: {formatDate(date)}</p>
@@ -33,7 +76,9 @@ const UserBookingCard = ({ booking }) => {
           </div>
         </div>
         <div className="h-full flex items-center">
-          <button className="btn mt-0">DELETE</button>
+          <button className="btn mt-0" onClick={handleSubmit}>
+            {loading ? <HashLoader size={35} color="#ffffff" /> : 'DELETE'}
+          </button>
         </div>
       </div>
     </div>

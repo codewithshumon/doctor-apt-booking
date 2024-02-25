@@ -27,7 +27,7 @@ const Appointments = () => {
 
         {!loading && !error && bookings.length === 0 && (
           <h2 className="mx-5 text-center text-headingColor leading-7 text-[20px] font-semibold ">
-            You do not any appointments yet!
+            You do not have any appointments yet!
           </h2>
         )}
       </div>
