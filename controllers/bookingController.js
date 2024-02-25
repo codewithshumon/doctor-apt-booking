@@ -5,15 +5,17 @@ import User from '../models/UserSchema.js';
 export const getAllBooking = async (req, res) => {
   const id = req.userId;
   try {
-    const bookings = await Booking.find(id);
+    const bookings = await Booking.find(id)
+      .populate('doctor', ['name', 'photo', 'specialization', 'ticketPrice'])
+      .populate('user', ['name', 'photo']);
 
     console.log('reviews', bookings);
     res
       .status(200)
-      .json({ sucess: true, message: 'Successful', data: bookings });
+      .json({ success: true, message: 'Successful', data: bookings });
   } catch (error) {
     console.log(error);
-    res.status(404).json({ sucess: false, message: 'Not found' });
+    res.status(404).json({ success: false, message: 'Not found' });
   }
 };
 
