@@ -3,7 +3,7 @@ import useFetchData from '../../hooks/useFetchData';
 
 import Error from '../../components/error/Error';
 import Loading from '../../components/loader/Loading';
-import BookingCard from '../../components/booking/BookingCard';
+import UserBookingCard from '../../components/booking/UserBookingCard';
 
 const MyBookings = () => {
   const {
@@ -19,9 +19,9 @@ const MyBookings = () => {
         {error && !loading && <Error errMessage={error} />}
 
         {!loading && !error && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 gap-4">
             {bookings.map((booking) => (
-              <BookingCard key={booking._id} booking={booking} />
+              <UserBookingCard key={booking._id} booking={booking} />
             ))}
           </div>
         )}

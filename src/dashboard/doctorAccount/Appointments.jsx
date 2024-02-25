@@ -1,69 +1,37 @@
-/* eslint-disable react/prop-types */
-import { formatDate } from '../../utils/formatData';
+import DoctorBookingCard from '../../components/booking/DoctorBookingCard';
+import Error from '../../components/error/Error';
+import Loading from '../../components/loader/Loading';
+import { BASE_URL } from '../../config';
+import useFetchData from '../../hooks/useFetchData';
 
-const Appointments = ({ appointments }) => {
+const Appointments = () => {
+  const {
+    data: bookings,
+    loading,
+    error,
+  } = useFetchData(`${BASE_URL}/booking`);
+
   return (
-    <table className="w-full text-left text-sm text-gray-500">
-      <thead className="text-xs text-gray-700 uppercase bg-gray-200">
-        <tr>
-          <th scope="col" className="px-6 py-3">
-            Name
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Gender
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Payment
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Price
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Booked on
-          </th>
-        </tr>
-      </thead>
+    <section>
+      <div>
+        {loading && !error && <Loading />}
+        {error && !loading && <Error errMessage={error} />}
 
-      <tbody>
-        {appointments?.map((item) => (
-          <tr key={item._id}>
-            <th
-              scope="row"
-              className="flex items-center px-6  py-4 text-gray-900 whitespace-nowrap"
-            >
-              <img
-                src={item.user.photo}
-                className="w-10 h-10 rounded-full"
-                alt=""
-              />
-              <div className="pl-3">
-                <div className="text-base font-semibold">{item.user.name}</div>
-                <div className="text-normal text-gray-500">
-                  {item.user.email}
-                </div>
-              </div>
-            </th>
-            <td className="px-6 py-4">{item.user.gender}</td>
-            <td className="px-6 py-4">
-              {item.isPaid && (
-                <div className="flex items-center">
-                  <div className="h-3 w-3 rounded-full bg-green-500"></div>
-                  Paid
-                </div>
-              )}
-              {!item.isPaid && (
-                <div className="flex items-center">
-                  <div className="h-3 w-3 rounded-full bg-red-500"></div>
-                  Unpaid
-                </div>
-              )}
-            </td>
-            <td className="px-6 py-4">{item.ticketPrice}</td>
-            <td className="px-6 py-4">{formatDate(item.createdAt)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        {!loading && !error && (
+          <div className="grid grid-cols-1 gap-4">
+            {bookings.map((booking) => (
+              <DoctorBookingCard key={booking._id} booking={booking} />
+            ))}
+          </div>
+        )}
+
+        {!loading && !error && bookings.length === 0 && (
+          <h2 className="mx-5 text-center text-headingColor leading-7 text-[20px] font-semibold ">
+            You do not any appointments yet!
+          </h2>
+        )}
+      </div>
+    </section>
   );
 };
 
