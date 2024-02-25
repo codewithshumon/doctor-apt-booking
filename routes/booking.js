@@ -14,13 +14,14 @@ const router = express.Router({ mergeParams: true });
 router
   .route('/')
   .get(getAllBooking)
-  .post(authenticate, restrict(['patient']), createBooking)
-  .delete(
-    authenticate,
-    restrict(['patient', 'doctor', 'admin']),
-    deleteBooking
-  );
+  .post(authenticate, restrict(['patient']), createBooking);
 
+router.delete(
+  '/:id/:userId/:doctorId',
+  authenticate,
+  restrict(['patient', 'doctor', 'admin']),
+  deleteBooking
+);
 // Diffrant way to do that
 // router.get('/', getAllReviews);
 // router.put('/', authenticate, restrict(['patient']), createReview);

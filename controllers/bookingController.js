@@ -9,7 +9,6 @@ export const getAllBooking = async (req, res) => {
       .populate('doctor', ['name', 'photo', 'specialization', 'ticketPrice'])
       .populate('user', ['name', 'photo']);
 
-    console.log('reviews', bookings);
     res
       .status(200)
       .json({ success: true, message: 'Successful', data: bookings });
@@ -20,15 +19,44 @@ export const getAllBooking = async (req, res) => {
 };
 
 export const deleteBooking = async (req, res) => {
-  try {
-    const bookings = await Booking.findByIdAndDelete();
+  const id = req.params.id;
+  const userId = req.params.userId;
+  const doctorId = req.params.doctorId;
 
-    console.log('reviews', bookings);
-    res
-      .status(200)
-      .json({ sucess: true, message: 'Successful', data: bookings });
+  console.log('req.params.id', req.params.id);
+
+  try {
+    const deletedBooking = await Booking.findOneAndDelete({ _id: id });
+
+    if (!deletedBooking) {
+      return res.status(404).json({
+        success: false,
+        message: 'Booking not found',
+      });
+    }
+
+    await Doctor.findByIdAndUpdate(
+      doctorId,
+      { $pull: { bookings: id } },
+      { new: true }
+    );
+    await User.findByIdAndUpdate(
+      userId,
+      { $pull: { bookings: id } },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'Successfully deleted',
+      deletedBooking,
+    });
   } catch (error) {
-    res.status(404).json({ sucess: false, message: 'Not found' });
+    console.log('deleteBooking', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete',
+    });
   }
 };
 
