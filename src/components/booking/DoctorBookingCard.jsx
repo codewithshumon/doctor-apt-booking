@@ -25,13 +25,10 @@ const DoctorBookingCard = ({ booking }) => {
   const userId = user._id;
   const doctorId = doctor._id;
 
-  console.log(booking);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    console.log('token', token);
     try {
       const res = await fetch(
         `${BASE_URL}/booking/${id}/${userId}/${doctorId}`,
@@ -42,8 +39,6 @@ const DoctorBookingCard = ({ booking }) => {
           },
         }
       );
-
-      console.log('res', res);
 
       const result = await res.json();
 

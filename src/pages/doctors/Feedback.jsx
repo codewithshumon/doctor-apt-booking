@@ -4,11 +4,21 @@ import { AiFillStar } from 'react-icons/ai';
 
 import { formatDateTime } from '../../utils/formatData';
 import FeedbackForm from './FeedbackForm';
+import { token } from '../../config';
 
 const Feedback = ({ reviews, totalRating }) => {
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
-  console.log('reviews', reviews);
+  const handleFeedSubmit = (e) => {
+    e.preventDefault();
+
+    if (token === 'null') {
+      return window.location.replace('/login');
+    } else {
+      setShowFeedbackForm(true);
+    }
+  };
+
   return (
     <div>
       <div className="mb-[50px]">
@@ -56,7 +66,7 @@ const Feedback = ({ reviews, totalRating }) => {
 
       {!showFeedbackForm && (
         <div className="text-center">
-          <button className="btn" onClick={() => setShowFeedbackForm(true)}>
+          <button className="btn" onClick={handleFeedSubmit}>
             Give Feedback
           </button>
         </div>

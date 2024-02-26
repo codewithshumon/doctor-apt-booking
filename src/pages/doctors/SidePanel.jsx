@@ -4,13 +4,19 @@
 import { useState } from 'react';
 import { formatTime } from '../../utils/formatData';
 import Modal from '../../components/modal/Modal';
+import { token } from '../../config';
 
 const SidePanel = ({ doctorId, timeSlots, ticketPrice }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleBookAppointment = () => {
-    console.log('handleBookAppointment');
-    setIsModalOpen(true);
+  const handleBookAppointment = (e) => {
+    e.preventDefault();
+
+    if (token === 'null') {
+      return window.location.replace('/login');
+    } else {
+      setIsModalOpen(true);
+    }
   };
 
   return (
@@ -58,8 +64,8 @@ const SidePanel = ({ doctorId, timeSlots, ticketPrice }) => {
         </ul>
       </div>
 
-      <button className="btn" onClick={handleBookAppointment}>
-        Book Appointment
+      <button className="btn w-full" onClick={handleBookAppointment}>
+        Set Appointment
       </button>
 
       {isModalOpen && (

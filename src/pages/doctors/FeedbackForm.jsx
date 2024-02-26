@@ -13,7 +13,6 @@ const FeedbackForm = () => {
 
   const { id } = useParams();
 
-  console.log('id from jsx', id);
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -32,8 +31,6 @@ const FeedbackForm = () => {
         },
         body: JSON.stringify({ rating, reviewText }),
       });
-
-      console.log('res', res);
 
       const result = await res.json();
 

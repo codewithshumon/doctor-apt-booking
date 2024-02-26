@@ -4,9 +4,10 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import uploadImageToCloudinary from '../../utils/imageUpload';
 import { BASE_URL, token } from '../../config';
 import { toast } from 'react-toastify';
+import { HashLoader } from 'react-spinners';
 
 const Profile = ({ doctorData }) => {
-  console.log('doctorData', doctorData);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: doctorData?.name,
     email: doctorData?.email,
@@ -23,7 +24,6 @@ const Profile = ({ doctorData }) => {
     photo: doctorData?.photo,
   });
 
-  console.log('formData.timeSlots', formData.timeSlots);
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -37,6 +37,7 @@ const Profile = ({ doctorData }) => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const res = await fetch(`${BASE_URL}/doctor/${doctorData._id}`, {
@@ -55,10 +56,12 @@ const Profile = ({ doctorData }) => {
       }
 
       toast.success(result.message);
-      window.location.reload();
     } catch (error) {
       console.log('error', error);
       toast.error(error.message);
+    } finally {
+      setLoading(false);
+      window.location.reload();
     }
   };
 
@@ -500,7 +503,11 @@ const Profile = ({ doctorData }) => {
             onClick={handleUpdateProfile}
             className=" bg-primaryColor text-white text-[18px] leading-[30px] w-full py-3 px-4 rounded-full"
           >
-            Update Profile
+            {loading ? (
+              <HashLoader size={35} color="#ffffff" />
+            ) : (
+              'Update Profile'
+            )}
           </button>
         </div>
       </form>

@@ -23,7 +23,6 @@ const DoctorDetails = () => {
     loading,
     error,
   } = useFetchData(`${BASE_URL}/doctor/${id}`);
-  console.log(doctor);
 
   const {
     name,

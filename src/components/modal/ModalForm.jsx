@@ -23,13 +23,10 @@ const ModalForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  console.log('formData', formData);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    console.log('token', token);
     try {
       const res = await fetch(`${BASE_URL}/doctor/${id}/booking`, {
         method: 'POST',
@@ -39,8 +36,6 @@ const ModalForm = () => {
         },
         body: JSON.stringify(formData),
       });
-
-      console.log('res', res);
 
       const result = await res.json();
 

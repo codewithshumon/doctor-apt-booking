@@ -13,13 +13,10 @@ const UserBookingCard = ({ booking }) => {
   const userId = user._id;
   const doctorId = doctor._id;
 
-  console.log(booking);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    console.log('token', token);
     try {
       const res = await fetch(
         `${BASE_URL}/booking/${id}/${userId}/${doctorId}`,
@@ -30,8 +27,6 @@ const UserBookingCard = ({ booking }) => {
           },
         }
       );
-
-      console.log('res', res);
 
       const result = await res.json();
 
@@ -48,7 +43,6 @@ const UserBookingCard = ({ booking }) => {
     }
   };
 
-  console.log(booking);
   return (
     <div className="w-full h-full">
       <div className="w-full h-full flex-col xs:flex-row flex items-center justify-between gap-4 xs:gap-0">
