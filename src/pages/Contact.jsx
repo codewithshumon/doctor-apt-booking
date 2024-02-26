@@ -1,55 +1,63 @@
+import { Helmet } from 'react-helmet-async';
+
 const Contact = () => {
   return (
-    <section>
-      <div className="px-4 mx-auto max-w-screen-md">
-        <h2 className="heading text-center">Contact Us</h2>
-        <p className="mb-8 lg:mb-16 font-light text-center text-para">
-          Got a technical issue? Want to send feedback about a beta feature? let
-          us know.
-        </p>
+    <>
+      <Helmet>
+        <title>Medicare - Contact Us</title>
+        <meta name="description" content="This is the constact us page." />
+      </Helmet>
+      <section>
+        <div className="px-4 mx-auto max-w-screen-md">
+          <h2 className="heading text-center">Contact Us</h2>
+          <p className="mb-8 lg:mb-16 font-light text-center text-para">
+            Got a technical issue? Want to send feedback about a beta feature?
+            let us know.
+          </p>
 
-        <form action="#" className="space-y-8">
-          <div className="">
-            <label htmlFor="email" className="form_label">
-              Your Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="example@gmail.com"
-              className="form_input mt-1"
-            />
-          </div>
-          <div className="">
-            <label htmlFor="subject" className="form_label">
-              Subject
-            </label>
-            <input
-              type="text"
-              id="subject"
-              placeholder="let us know how we can help you"
-              className="form_input mt-1"
-            />
-          </div>
-          <div className=" sm:col-span-2">
-            <label htmlFor="message" className="form_label">
-              Your Message
-            </label>
-            <textarea
-              rows={6}
-              type="text"
-              id="message"
-              placeholder="Write your message here...."
-              className="form_input mt-1"
-            />
-          </div>
+          <form action="#" className="space-y-8">
+            <div className="">
+              <label htmlFor="email" className="form_label">
+                Your Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="example@gmail.com"
+                className="form_input mt-1"
+              />
+            </div>
+            <div className="">
+              <label htmlFor="subject" className="form_label">
+                Subject
+              </label>
+              <input
+                type="text"
+                id="subject"
+                placeholder="let us know how we can help you"
+                className="form_input mt-1"
+              />
+            </div>
+            <div className=" sm:col-span-2">
+              <label htmlFor="message" className="form_label">
+                Your Message
+              </label>
+              <textarea
+                rows={6}
+                type="text"
+                id="message"
+                placeholder="Write your message here...."
+                className="form_input mt-1"
+              />
+            </div>
 
-          <button type="submit" className="btn rounded sm:w-fit">
-            Submit
-          </button>
-        </form>
-      </div>
-    </section>
+            <button type="submit" className="btn rounded sm:w-fit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </section>
+    </>
   );
 };
 

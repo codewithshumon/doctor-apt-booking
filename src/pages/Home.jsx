@@ -17,10 +17,15 @@ import ServiceList from '../components/services/ServiceList';
 import DoctorList from '../components/doctors/DoctorList';
 import FaqList from '../components/faq/FaqList';
 import Testimonial from '../components/testimonials/Testimonial';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   return (
     <>
+      <Helmet>
+        <title>Medicare - Home</title>
+        <meta name="description" content="This is the home page." />
+      </Helmet>
       {/* ----hero section start---- */}
 
       <section className="hero_section pt-[60px] 2xl:h-[800px]">

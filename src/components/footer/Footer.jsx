@@ -85,7 +85,11 @@ const Footer = () => {
           <div>
             <img src={logo} alt="logo" />
             <p className="text-[16px] leading-7 font-[400] text-textColor mt-4">
-              Copyright © {year} developed by SoftoZayaan all right reserved.
+              Copyright © {year} developed by{' '}
+              <Link to={'https://softozet.vercel.app'} className=" font-bold">
+                Softozet Limited
+              </Link>{' '}
+              all right reserved.
             </p>
 
             <div className="flex items-center gap-3 mt-4">

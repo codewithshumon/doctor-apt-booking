@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+
 import Home from './pages/Home';
 import Doctors from './pages/doctors/Doctors';
 import DoctorDetails from './pages/doctors/DoctorDetails';
@@ -7,7 +8,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Contact from './pages/Contact';
 import Services from './pages/Services';
+import PageNotFound from './pages/PageNotFound';
 import ProtectedRoute from './routes/ProtectedRoute';
+
 import MyAccount from './dashboard/userAccount/MyAccount';
 import Dashboard from './dashboard/doctorAccount/Dashboard';
 import Header from './components/header/Header';
@@ -21,6 +24,7 @@ function App() {
         <Modal />
         <Header />
         <Routes>
+          <Route path="*" element={<PageNotFound />} />
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/doctors" element={<Doctors />} />

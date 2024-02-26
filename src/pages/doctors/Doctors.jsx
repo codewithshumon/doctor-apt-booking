@@ -7,6 +7,7 @@ import Loading from '../../components/loader/Loading';
 
 import DoctorCard from '../../components/doctors/DoctorCard';
 import Testimonial from '../../components/testimonials/Testimonial';
+import { Helmet } from 'react-helmet-async';
 
 const Doctors = () => {
   const [query, setQuery] = useState('');
@@ -32,6 +33,10 @@ const Doctors = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Medicare - Find a Doctor</title>
+        <meta name="description" content="This is the find a doctor page." />
+      </Helmet>
       <section className="bg-[#fff9ea]">
         <div className="container text-center">
           <h2 className="heading">Find a Doctor</h2>
