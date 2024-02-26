@@ -13,7 +13,7 @@ const router = express.Router({ mergeParams: true });
 //we need to put "authenticate and restrict middlware" where we put { mergeParams: true }
 router
   .route('/')
-  .get(getAllBooking)
+  .get(authenticate, getAllBooking)
   .post(authenticate, restrict(['patient']), createBooking);
 
 router.delete(

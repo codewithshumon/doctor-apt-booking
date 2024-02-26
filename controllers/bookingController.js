@@ -4,10 +4,16 @@ import User from '../models/UserSchema.js';
 
 export const getAllBooking = async (req, res) => {
   const id = req.userId;
+
   try {
-    const bookings = await Booking.find(id)
+    const bookings = await Booking.find({
+      $or: [{ user: id }, { doctor: id }],
+    })
       .populate('doctor', ['name', 'photo', 'specialization', 'ticketPrice'])
       .populate('user', ['name', 'photo']);
+
+    console.log('bookings', bookings);
+    console.log('id', id);
 
     res
       .status(200)
